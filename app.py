@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello():
     engine = create_engine('postgresql://postgres:postgres@localhost:5432/air_pollution')
     df = pd.read_sql_table("air_pollution_forecast",con=engine)
-    return df.to_json()
+    return df.to_dict()
 # load the index.html when requesting the https://localhost:5000
 @app.route('/')
 def home():
