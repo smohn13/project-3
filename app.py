@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 from config import app_key
 import requests
 import pandas as pd
@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello():
     engine = create_engine('postgresql://postgres:postgres@localhost:5432/air_pollution')
     df = pd.read_sql_table("air_pollution_forecast",con=engine)
-    return df.to_dict()
+    return Response(df.to_json(orient="records"), mimetype='application/json')
 # load the index.html when requesting the https://localhost:5000
 @app.route('/')
 def home():
