@@ -25,10 +25,10 @@ The purpose of this project is to visually show the difference between the air p
 
 
 ### High-Level Overview:
-* We utilized Python API to pull historical air pollution data onto a Jupyter Notebook. From there, we used Pandas to prep our data set for PostGres. This includes filtering for relevant data, converting unix time stamp to normal date time, and creating a dataframe to house our clean data. We also created an engine to form a connection between our Jupyter Notebook and the database in PostGres. Before passing our information, we confirmed that our database, air_pollution_forecast, was running.
+* We utilized Python API to pull historical air pollution data onto a Jupyter Notebook. From there, we used Pandas to prep our data set for PostGres. This includes filtering for relevant data, converting unix time stamp to normal date time, and creating a dataframe to house our clean data. We then created an engine to form a connection between our Jupyter Notebook and the database in PostGres. Before passing our information, we confirmed that our database, air_pollution_forecast, was running.
 <br></br>
 
-* We then created our Flask routes. By doing so, we'll be able to call on the data that's stored in Postgres database. Next, we ran our python file in terminal and lastly, we used HTML to render the data, CSS for presentation and content, and JavaScript to read the data from Flask API.
+* After the information was transfered to our PostGres database, we then created unique Flask routes in the app.py file. By doing so, we'll be able to map a specific URL with an associated fuction. Next, we ran our python script in terminal and lastly, we used HTML to render the data, CSS for presentation and content, and JavaScript to read the data from Flask API.
 <br></br>
 
 ## Visualizations
