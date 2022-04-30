@@ -42,8 +42,37 @@ function lineChart(data){
     };
 
   var data = [trace1, trace2];
+
+  var layout = {
+    title: {
+        text: 'Air Pollutant By City',
+    },
+    xaxis:{
+        automargin: true,
+        // x: [1,2,3,4,5,6,7,8,9]
+        // range: [2,5],
+        title:{
+            text:'Date',
+            font: {
+                family: 'Courier New, monospace',
+                size: 26,
+                color: "#7f7f7f"
+            }
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Air Pollutant Level',
+            font: {
+                family: 'Courier New, monospace',
+                size: 18,
+                color: '#7f7f7f'
+            }
+        }
+    }
+  };
   
-  Plotly.newPlot('cities_no2', data);
+  Plotly.newPlot('cities_no2', data, layout);
 
 }
 
@@ -89,7 +118,8 @@ function pieChart(data){
 
     var layout = {
         height: 600,
-        width: 800
+        width: 800,
+        title: 'Average Air Pollutant Levels'
     };
 
     Plotly.newPlot("pie", data, layout);
@@ -129,6 +159,50 @@ function updatePlotly(newdata) {
 // init(co_avg, no2_avg, o3_avg);
 
 //--------------------------------------------------------------
+
+function maxCarbon() {
+    // Create a JSON object to store the chart configurations
+    d3.json("http://127.0.0.1:5000/get_max_by_city").then(function(data)
+    {const chartConfigs = {
+        //Specify the chart type
+        type: "column2d",
+        //Set the container object
+        renderAt: "chart-container",
+        //Specify the width of the chart
+        width: "100%",
+        //Specify the height of the chart
+        height: "400",
+        //Set the type of data
+        dataFormat: "json",
+        dataSource: {
+          chart: {
+            //Set the chart caption
+            caption: "Max Carbon Monoxide Levels By City",
+            subCaption: "Timeframe: 01/01/22-01/31/22",
+            //Set the x-axis name
+            xAxisName: "City",
+            //Set the y-axis name
+            yAxisName: "Carbon Monoxide Levels (mcg)",
+            // numberSuffix: "mcg",
+            //Set the theme for your chart
+            theme: "fusion"
+          },
+          // Chart Data from Step 2
+          data: data
+        }
+      };
+      FusionCharts.ready(function(){
+        var fusioncharts = new FusionCharts(chartConfigs);
+        fusioncharts.render();
+        });
+    })
+
+  }
+
+maxCarbon()
+
+
+
 
 
 d3.json("http://127.0.0.1:5000/get_air_pollution").then(function(data){
